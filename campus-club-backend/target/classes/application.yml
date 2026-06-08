@@ -1,0 +1,47 @@
+server:
+  port: 8080
+
+spring:
+  # 使用H2内存数据库(开发/演示模式)，如需切换MySQL请注释h2部分并启用mysql部分
+  datasource:
+    # H2 内存数据库配置
+    url: jdbc:h2:mem:campus_club;DB_CLOSE_DELAY=-1;MODE=MySQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+    # MySQL 配置 (生产环境)
+    # url: jdbc:mysql://localhost:3306/campus_club?useSSL=false&serverTimezone=Asia/Shanghai&characterEncoding=utf8
+    # driver-class-name: com.mysql.cj.jdbc.Driver
+    # username: root
+    # password: your_password
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
+    # MySQL:
+    # database-platform: org.hibernate.dialect.MySQLDialect
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+    default-property-inclusion: non_null
+
+# JWT配置
+jwt:
+  secret: CampusClubPlatformSecretKey2026VeryLongAndSecureKeyForJwtTokenGeneration
+  expiration: 86400000
+
+# 文件上传配置
+file:
+  upload-dir: ./uploads
+  max-size: 10MB
